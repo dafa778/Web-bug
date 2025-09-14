@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>MANZX BUG APK</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Arial', sans-serif;
+      background: url('https://e.top4top.io/p_3465k1hhy1.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: white;
+    }
+
+    .container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 80px 20px 20px 20px;
+    }
+
+    #login-container, #main-app, #result-page {
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      padding: 20px;
+      background-color: rgba(0, 0, 0, 0.6);
+      border-radius: 16px;
+      width: 90%;
+      max-width: 400px;
+    }
+
+    .active {
+      display: flex !important;
+    }
+
+    input {
+      width: 100%;
+      padding: 15px;
+      margin: 10px 0;
+      font-size: 16px;
+      border-radius: 8px;
+      border: none;
+    }
+
+    button {
+      padding: 12px 20px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+      background-color: #00aaff;
+      color: white;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    .anim-text {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-size: 36px;
+      font-weight: bold;
+      background: linear-gradient(90deg, #8e2de2, #4a00e0);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 10px #8e2de2, 0 0 20px #4a00e0;
+      opacity: 0;
+      transition: all 0.8s ease;
+      z-index: 1002;
+    }
+
+    .anim-text.show {
+      opacity: 1;
+    }
+
+    .hamburger {
+      background: none;
+      border: none;
+      font-size: 24px;
+      color: white;
+      cursor: pointer;
+    }
+
+    #menu {
+      display: none;
+      margin-top: 5px;
+    }
+
+    #menu button {
+      background-color: #ff4444;
+      font-size: 14px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      width: auto;
+    }
+
+    .fixed-title {
+      position: fixed;
+      top: 10px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      z-index: 1000;
+      font-size: 22px;
+      font-weight: bold;
+      color: white;
+      text-shadow: 0 0 6px #000;
+    }
+
+    .fixed-menu {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1001;
+    }
+
+    .result-box {
+      text-align: center;
+      font-size: 18px;
+      font-weight: bold;
+      margin-bottom: 20px;
+    }
+
+    .footer {
+      position: fixed;
+      bottom: 10px;
+      left: 0;
+      right: 0;
+      text-align: center;
+      font-size: 14px;
+      color: #ccc;
+      z-index: 999;
+      line-height: 1.4;
+    }
+  </style>
+</head>
+<body>
+  <!-- Animasi Welcome -->
+  <div class="anim-text" id="welcome-anim">WELCOME MEK</div>
+
+  <div class="container">
+    <!-- LOGIN -->
+    <div id="login-container" class="active">
+      <input type="text" id="username" placeholder="Masukkan Username">
+      <input type="password" id="password" placeholder="Masukkan Password">
+      <button onclick="login()">Login</button>
+    </div>
+
+    <!-- HALAMAN UTAMA -->
+    <div id="main-app">
+      <div class="fixed-title">MANZX BUG APK</div>
+      <div class="fixed-menu">
+        <button class="hamburger" onclick="toggleMenu()">☰</button>
+        <div id="menu">
+          <button onclick="logout()">Log out</button>
+        </div>
+      </div>
+
+      <h2>Manzx Bug Sender</h2>
+      <input type="text" id="target" placeholder="Masukkan nomor target (62xxxx)">
+      <div class="button-group">
+        <button onclick="sendCrash('Crash V1')">Crash V1</button>
+        <button onclick="sendCrash('Crash V2')">Crash V2</button>
+        <button onclick="sendCrash('Crash V3')">Crash V3</button>
+      </div>
+    </div>
+
+    <!-- HALAMAN HASIL -->
+    <div id="result-page">
+      <div class="result-box" id="result-text"></div>
+      <button onclick="backToMain()">Kembali ke Halaman Utama</button>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    Status server : <span style="color: #00ff88;">Online</span><br>
+    Developer : <strong>Manzx</strong>
+  </div>
+
+  <script>
+    const correctUser = "manzxbugapk";
+    const correctPass = "manzxrapli";
+
+    function login() {
+      const user = document.getElementById("username").value.trim();
+      const pass = document.getElementById("password").value.trim();
+
+      if (user === correctUser && pass === correctPass) {
+        localStorage.setItem("loggedIn", "true");
+        document.getElementById("login-container").classList.remove("active");
+        const welcome = document.getElementById("welcome-anim");
+        welcome.classList.add("show");
+
+        setTimeout(() => {
+          welcome.style.display = "none";
+          document.getElementById("main-app").classList.add("active");
+        }, 3000);
+      } else {
+        alert("Username atau password salah!");
+      }
+    }
+
+    function sendCrash(type) {
+      const target = document.getElementById("target").value.trim();
+      if (!/^[0-9]+$/.test(target)) {
+        alert("Only angka bung! Contoh: 628xxxx");
+        return;
+      }
+
+      document.getElementById("main-app").classList.remove("active");
+      document.getElementById("result-page").classList.add("active");
+
+      document.getElementById("result-text").innerHTML =
+        `✅ Success Crash By Manzx<br>🧨 Type: ${type}<br>📞 Target: ${target}`;
+
+      const voice = new SpeechSynthesisUtterance("Success Crash by Manzx");
+      voice.lang = "en-US";
+      speechSynthesis.speak(voice);
+    }
+
+    function backToMain() {
+      document.getElementById("result-page").classList.remove("active");
+      document.getElementById("main-app").classList.add("active");
+      document.getElementById("target").value = "";
+    }
+
+    function toggleMenu() {
+      const menu = document.getElementById("menu");
+      menu.style.display = (menu.style.display === "none" || menu.style.display === "") ? "block" : "none";
+    }
+
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      document.getElementById("main-app").classList.remove("active");
+      document.getElementById("result-page").classList.remove("active");
+      document.getElementById("login-container").classList.add("active");
+      document.getElementById("welcome-anim").style.display = "block";
+    }
+
+    window.onload = () => {
+      if (localStorage.getItem("loggedIn") === "true") {
+        document.getElementById("login-container").classList.remove("active");
+        document.getElementById("main-app").classList.add("active");
+        document.getElementById("welcome-anim").style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
